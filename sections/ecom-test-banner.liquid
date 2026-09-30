@@ -66,6 +66,51 @@
   </header>
 </test-header>
 
+{% comment %} Banner Area {% endcomment %}
+<div class="ecom-test__banner">
+  <div class="ecom-test-banner__inner">
+    <div class="ecom-test-banner__artwork ecom-test-banner__artwork--top">
+      {%- if section.settings.banner_artwork_desktop != blank -%}
+        {{ section.settings.banner_artwork_desktop | image_url: width: 1600 | image_tag: loading: 'lazy' }}
+      {%- else -%}
+        {{ 'lifestyle-2' | placeholder_svg_tag }}
+      {%- endif -%}
+    </div>
+    <div class="ecom-test-banner__artwork ecom-test-banner__artwork--bottom">
+      {%- if section.settings.banner_artwork_desktop != blank -%}
+        {{ section.settings.banner_artwork_desktop | image_url: width: 1000 | image_tag: loading: 'lazy' }}
+      {%- else -%}
+        {{ 'lifestyle-2' | placeholder_svg_tag }}
+      {%- endif -%}
+    </div>
+    <div class="ecom-test-banner__artwork ecom-test-banner__artwork--mobile">
+      {%- if section.settings.banner_artwork_mobile != blank -%}
+        {{ section.settings.banner_artwork_mobile | image_url: width: 800 | image_tag: loading: 'lazy' }}
+      {%- else -%}
+        {{ 'lifestyle-2' | placeholder_svg_tag }}
+      {%- endif -%}
+    </div>
+
+    <div class="container ecom-test-banner__content">
+      <div class="ecom-test-banner__content-inner">
+        <h2 class="ecom-test-banner__title font-jost">{{ section.settings.banner_heading }}</h2>
+        <p class="ecom-test-banner__text ecom-test-banner__text--desktop font-jost">{{ section.settings.banner_description }}</p>
+        <p class="ecom-test-banner__text ecom-test-banner__text--mobile font-jost">{{ section.settings.banner_description_mobile }}</p>
+        {%- if section.settings.banner_cta_url != blank -%}
+          <a href="{{ section.settings.banner_cta_url }}" class="ecom-test-banner__button font-jost">
+            <span class="ecom-test-banner__button-bg"></span>
+            <span class="ecom-test-banner__button-line"></span>
+            <span class="ecom-test-banner__button-label">{{ section.settings.banner_cta_text }}</span>
+            <span class="ecom-test-banner__button-arrow">{% render 'ecom-test-icon-arrow' %}</span>
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  <p class="ecom-test-banner__subtext font-jost text-center">{{ section.settings.announcement_text }}</p>
+</div>
+
 {% comment %} Hide default header {% endcomment %}
 <style>
   .shopify-section-group-header-group  {

@@ -470,3 +470,178 @@ header.ecom-site__header:has(.site-header__toggle[aria-expanded='true']) .site-h
   }
 }
 
+/* ==========================================================================
+   9. Hero / Banner
+   ========================================================================== */
+
+.ecom-test__banner {
+  background-color: var(--color-white);
+}
+
+.ecom-test-banner__inner {
+  position: relative;
+  height: calc(100vh - 64px);
+  overflow: hidden;
+}
+
+.ecom-test-banner__artwork {
+  display: block;
+  position: absolute;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.ecom-test-banner__artwork img,
+.ecom-test-banner__artwork svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.ecom-test-banner__artwork--top {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(48vh - 30px);
+}
+
+.ecom-test-banner__artwork--top img,
+.ecom-test-banner__artwork--top svg {
+  position: absolute;
+  top: -20%;
+}
+
+.ecom-test-banner__artwork--bottom {
+  left: calc(var(--page-gutter) + var(--banner-content-width));
+  right: 0;
+  bottom: 0;
+  height: calc(51vh - 34px);
+  width: 85%;
+}
+
+.ecom-test-banner__artwork--mobile {
+  display: none;
+}
+
+.ecom-test-banner__content {
+  height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.ecom-test-banner__content-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: max(50px, 5vh);
+  max-width: var(--banner-content-width);
+  padding-block: max(35px, 4.139vw) max(51px, 3.5417vw);
+  background-color: var(--color-white);
+}
+
+.ecom-test-banner__title {
+  margin: 0;
+  font-size: 70px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--color-black);
+}
+
+.ecom-test-banner__text {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--color-black);
+}
+
+.ecom-test-banner__text--mobile {
+  display: none;
+}
+
+.ecom-test-banner__button {
+  display: inline-block;
+  position: relative;
+  height: var(--hero-button-height);
+  min-width: var(--hero-button-width);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20.5px;
+  text-transform: uppercase;
+}
+
+.ecom-test-banner__button-bg {
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-black);
+}
+
+.ecom-test-banner__button-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1.063px;
+  height: 100%;
+  background-color: var(--color-yellow);
+  opacity: 0;
+  transition: width var(--transition-button), opacity var(--transition-button);
+}
+
+.ecom-test-banner__button:hover .ecom-test-banner__button-line {
+  width: 100%;
+  opacity: 1;
+}
+
+.ecom-test-banner__button-label {
+  position: absolute;
+  left: 55px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-white);
+  transition: color var(--transition-button);
+}
+
+.ecom-test-banner__button:hover .ecom-test-banner__button-label {
+  color: var(--color-black);
+}
+
+.ecom-test-banner__button-arrow {
+  display: inline-flex;
+  position: absolute;
+  right: 25px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.ecom-test-banner__button-arrow svg {
+  width: 26px;
+  height: auto;
+  color: var(--color-white);
+  animation: button-arrow-blink-in var(--transition-button);
+}
+
+.ecom-test-banner__button:hover .ecom-test-banner__button-arrow svg {
+  color: var(--color-black);
+  animation: button-arrow-blink-in var(--transition-button);
+}
+
+.ecom-test-banner__subtext {
+  position: relative;
+  z-index: 1;
+  padding-block: 15px;
+  background-color: var(--color-gray);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 13.4px;
+}
+
+@media screen and (max-width: 749px) {
+  
+}
