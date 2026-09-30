@@ -74,10 +74,77 @@
         "banner_cta_url": "#",
         "announcement_text": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL"
       }
+    },
+    "ecom_test_grid_jNdaNx": {
+      "type": "ecom-test-grid",
+      "blocks": {
+        "product_block_qtA9aW": {
+          "type": "product_block",
+          "settings": {
+            "product": "black-leather-bag",
+            "icon_left": 62,
+            "icon_top": 56
+          }
+        },
+        "product_block_QhmrmL": {
+          "type": "product_block",
+          "settings": {
+            "product": "blue-silk-tuxedo",
+            "icon_left": 85,
+            "icon_top": 52
+          }
+        },
+        "product_block_D4ncPf": {
+          "type": "product_block",
+          "settings": {
+            "product": "chequered-red-shirt",
+            "icon_left": 63,
+            "icon_top": 21
+          }
+        },
+        "product_block_hHzTkp": {
+          "type": "product_block",
+          "settings": {
+            "product": "classic-leather-jacket",
+            "icon_left": 72,
+            "icon_top": 18
+          }
+        },
+        "product_block_zTCeJd": {
+          "type": "product_block",
+          "settings": {
+            "product": "classic-varsity-top",
+            "icon_left": 52,
+            "icon_top": 26
+          }
+        },
+        "product_block_VzmWij": {
+          "type": "product_block",
+          "settings": {
+            "product": "dark-denim-top",
+            "icon_left": 40,
+            "icon_top": 65
+          }
+        }
+      },
+      "block_order": [
+        "product_block_qtA9aW",
+        "product_block_QhmrmL",
+        "product_block_D4ncPf",
+        "product_block_hHzTkp",
+        "product_block_zTCeJd",
+        "product_block_VzmWij"
+      ],
+      "name": "Ecom Test Grid",
+      "settings": {
+        "heading": "Tisso vison in the wild",
+        "upsell_product": "dark-winter-jacket"
+      }
     }
   },
   "order": [
     "main",
-    "ecom_test_banner_gfqQxm"
+    "ecom_test_banner_gfqQxm",
+    "ecom_test_grid_jNdaNx"
   ]
 }

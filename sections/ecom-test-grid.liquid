@@ -5,7 +5,7 @@
 <div
   class="ecom-test-grid"
   data-product-grid
-  data-upsell-product-id="{{ section.settings.upsell_product.first_available_variant.id }}"
+  data-upsell-product-id="{{ section.settings.upsell_product.id }}"
   data-upsell-in-cart="false"
   >
   <div class="container container-grid">
@@ -49,7 +49,7 @@
 
           {%- if product != blank -%}
             <template data-quick-view-template>
-              <div class="ecom-test-quick-view__media">
+              <div class="ecom-test-quick-view__media ecom-flex">
                 {{
                   product.featured_image
                   | image_url: width: 460
@@ -60,14 +60,14 @@
                     widths: '120, 240, 360',
                     sizes: '120px'
                 }}
-                <div class="ecom-test-quick-view__info">
-                  <p class="ecom-test-quick-view__title">{{ product.title }}</p>
-                  <p class="ecom-test-quick-view__price" data-quick-view-price>{{ product.price | money | strip_html }}</p>
-                  <p class="ecom-test-quick-view__description">{{ product.description | strip_html | truncate: 85 }}</p>
+                <div class="ecom-test-quick-view__info ecom-flex flex-column">
+                  <p class="ecom-test-quick-view__title font-jost">{{ product.title }}</p>
+                  <p class="ecom-test-quick-view__price font-lustria" data-quick-view-price>{{ product.price | money | strip_html }}</p>
+                  <p class="ecom-test-quick-view__description font-jost">{{ product.description | strip_html | truncate: 85 }}</p>
                 </div>
               </div>
 
-              <div class="ecom-test-quick-view__options">
+              <div class="ecom-test-quick-view__options ecom-flex flex-column">
                 {%- for option in product.options_with_values -%}
                   {%- assign option_name_down = option.name | downcase -%}
                   <div
@@ -76,19 +76,19 @@
                     data-option-index="{{ forloop.index0 }}"
                     data-option-name="{{ option_name_down }}"
                   >
-                    <p class="ecom-test-quick-view__option-label">{{ option.name }}</p>
+                    <p class="ecom-test-quick-view__option-label font-jost">{{ option.name }}</p>
 
                     {%- if option_name_down == 'color' or option_name_down == 'colour' -%}
-                      <div class="ecom-test-quick-view__swatches" role="radiogroup" aria-label="{{ option.name }}">
+                      <div class="ecom-test-quick-view__swatches ecom-flex" role="radiogroup" aria-label="{{ option.name }}">
                         {%- for value in option.values -%}
                           <button
                             type="button"
-                            class="ecom-test-quick-view__swatch"
+                            class="ecom-test-quick-view__swatch ecom-flex"
                             data-option-value="{{ value | escape }}"
                             aria-pressed="false"
                           >
-                            <span class="ecom-test-quick-view__swatch-color"></span>
-                            <span class="ecom-test-quick-view__swatch-name">{{ value }}</span>
+                            <span class="ecom-test-quick-view__swatch-color" style="background-color: {{ value }}"></span>
+                            <span class="ecom-test-quick-view__swatch-name ecom-flex items-center font-jost">{{ value }}</span>
                           </button>
                         {%- endfor -%}
                       </div>
@@ -96,7 +96,7 @@
                       <div class="ecom-test-quick-view__select" data-quick-view-select>
                         <button
                           type="button"
-                          class="ecom-test-quick-view__select-toggle"
+                          class="ecom-test-quick-view__select-toggle ecom-flex items-center justify-between font-jost"
                           aria-haspopup="listbox"
                           aria-expanded="false"
                         >
@@ -111,7 +111,7 @@
                         </button>
                         <ul class="ecom-test-quick-view__select-list" role="listbox" hidden>
                           {%- for value in option.values -%}
-                            <li class="ecom-test-quick-view__select-option" role="option" data-option-value="{{ value | escape }}">
+                            <li class="ecom-test-quick-view__select-option font-jost" role="option" data-option-value="{{ value | escape }}">
                               {{ value }}
                             </li>
                           {%- endfor -%}
@@ -122,7 +122,11 @@
                 {%- endfor -%}
               </div>
 
-              <button type="button" class="ecom-test-quick-view__add-to-cart" data-quick-view-add disabled>
+              <button 
+                type="button" 
+                class="ecom-test-quick-view__add-to-cart inline-flex items-center justify-center font-jost u-uppercase" 
+                data-quick-view-add disabled
+                >
                 <span class="ecom-test-quick-view__add-to-cart-text">Add to cart</span>
                 <span class="ecom-test-quick-view__add-to-cart-arrow">{% render 'ecom-test-icon-arrow' %}</span>
               </button>
@@ -175,10 +179,14 @@
 {%- comment -%} One shell for the whole page. On open, JS clones whichever
    card's <template> was clicked into data-quick-view-content — the shell
    itself owns no product-specific markup, only the chrome around it. {%- endcomment -%}
-<test-quick-view class="ecom-test-quick-view" hidden>
+<test-quick-view class="ecom-test-quick-view ecom-flex items-center justify-center" hidden>
   <div class="ecom-test-quick-view__overlay" data-quick-view-overlay></div>
   <div class="ecom-test-quick-view__dialog" role="dialog" aria-modal="true" aria-label="Quick view">
-    <button type="button" class="ecom-test-quick-view__close" data-quick-view-close aria-label="Close">
+    <button 
+      type="button" class="ecom-test-quick-view__close inline-flex items-center justify-center" 
+      data-quick-view-close 
+      aria-label="Close"
+      >
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M1 1L15 15" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
         <path d="M15 1L1 15" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
