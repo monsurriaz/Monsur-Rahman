@@ -58,6 +58,8 @@
   --font-lustria: "Lustria", serif;
 
   --page-gutter: max(50px, calc(13.5656vw - 145.345px));
+  --grid-gutter: max(50px, calc(18.6604vw - 218.71px));
+  --grid-gap: max(20px, calc(0.9368vw + 6.51px));
   
   /* Borders */
   --border-thin: 0.5px;
@@ -643,5 +645,162 @@ header.ecom-site__header:has(.site-header__toggle[aria-expanded='true']) .site-h
 }
 
 @media screen and (max-width: 749px) {
-  
+  .ecom-test-banner__inner {
+    min-height: 421px;
+    height: unset;
+  }
+
+  .ecom-test-banner__artwork--top,
+  .ecom-test-banner__artwork--bottom {
+    display: none;
+  }
+
+  .ecom-test-banner__artwork--mobile {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: calc(50% + 15.5px);
+    transform: translateX(-50%);
+    width: 686px;
+    height: 264px;
+  }
+
+  .ecom-test-banner__content-inner {
+    align-items: center;
+    max-width: none;
+    gap: 24px;
+    padding-block: 49px 20px;
+    text-align: center;
+    background-color: var(--color-white);
+  }
+
+  .ecom-test-banner__content {
+    height: unset;
+    padding-inline: 0px;
+  }
+
+  .ecom-test-banner__title {
+    font-size: 30px;
+  }
+
+  .ecom-test-banner__text {
+    max-width: 340px;
+    font-size: 16px;
+    line-height: 1.3;
+  }
+
+  .ecom-test-banner__text--desktop {
+    display: none;
+  }
+
+  .ecom-test-banner__text--mobile {
+    display: block;
+  }
+
+  .ecom-test-banner__button {
+    position: absolute;
+    top: 337px;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 193px;
+    height: 45px;
+  }
+
+  .ecom-test-banner__button-label {
+    left: 40px;
+  }
+
+  .ecom-test-banner__button-arrow {
+    right: 20px;
+  }
+
+  .ecom-test-banner__button-arrow svg {
+    width: 24px;
+  }
 }
+
+/* ==========================================================================
+   9. Hero / Banner
+   ========================================================================== */
+
+.ecom-test-grid {
+  display: block;
+  background-color: var(--color-white);
+  padding-block: 90px;
+}
+
+.ecom-test-grid__title {
+  margin: 0 0 30px;
+
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--color-black);
+}
+
+.ecom-test-grid__items {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--grid-gap);
+}
+
+.ecom-test-grid__card {
+  position: relative;
+  aspect-ratio: 433 / 444;
+}
+
+.ecom-test-grid__card-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ecom-test-grid__card-button {
+  position: absolute;
+  left: var(--quick-view-left);
+  top: var(--quick-view-top);
+  transform: translate(-50%, -50%);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: var(--color-white);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+
+.ecom-test-grid__card-button svg {
+  width: 10px;
+  height: 10px;
+}
+
+@media screen and (max-width: 749px){
+  .ecom-test-grid {
+    padding-block: 40px 30px;
+  }
+
+  .ecom-test-grid__title {
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .ecom-test-grid__items {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 5px;
+  }
+
+  .ecom-test-grid__card {
+    aspect-ratio: 169 / 186.42;
+  }
+
+  .ecom-test-grid__card-button {
+    width: 15.71px;
+    height: 15.71px;
+  }
+
+  .ecom-test-grid__card-button svg {
+    width: 7px;
+    height: 7px;
+  }
+}
+
