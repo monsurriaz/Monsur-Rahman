@@ -58,6 +58,8 @@
   --font-lustria: "Lustria", serif;
 
   --page-gutter: max(50px, calc(13.5656vw - 145.345px));
+  --grid-gutter: max(50px, calc(18.6604vw - 218.71px));
+  --grid-gap: max(20px, calc(0.9368vw + 6.51px));
   
   /* Borders */
   --border-thin: 0.5px;
@@ -205,7 +207,7 @@ img {
 
 /* Display */
 
-.flex {display: flex;}
+.ecom-flex {display: flex;}
 .inline-flex {display: inline-flex;}
 .grid {display: grid;}
 
@@ -643,5 +645,463 @@ header.ecom-site__header:has(.site-header__toggle[aria-expanded='true']) .site-h
 }
 
 @media screen and (max-width: 749px) {
-  
+  .ecom-test-banner__inner {
+    min-height: 421px;
+    height: unset;
+  }
+
+  .ecom-test-banner__artwork--top,
+  .ecom-test-banner__artwork--bottom {
+    display: none;
+  }
+
+  .ecom-test-banner__artwork--mobile {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: calc(50% + 15.5px);
+    transform: translateX(-50%);
+    width: 686px;
+    height: 264px;
+  }
+
+  .ecom-test-banner__content-inner {
+    align-items: center;
+    max-width: none;
+    gap: 24px;
+    padding-block: 49px 20px;
+    text-align: center;
+    background-color: var(--color-white);
+  }
+
+  .ecom-test-banner__content {
+    height: unset;
+    padding-inline: 0px;
+  }
+
+  .ecom-test-banner__title {
+    font-size: 30px;
+  }
+
+  .ecom-test-banner__text {
+    max-width: 340px;
+    font-size: 16px;
+    line-height: 1.3;
+  }
+
+  .ecom-test-banner__text--desktop {
+    display: none;
+  }
+
+  .ecom-test-banner__text--mobile {
+    display: block;
+  }
+
+  .ecom-test-banner__button {
+    position: absolute;
+    top: 337px;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 193px;
+    height: 45px;
+  }
+
+  .ecom-test-banner__button-label {
+    left: 40px;
+  }
+
+  .ecom-test-banner__button-arrow {
+    right: 20px;
+  }
+
+  .ecom-test-banner__button-arrow svg {
+    width: 24px;
+  }
+}
+
+/* ==========================================================================
+   9. Hero / Banner
+   ========================================================================== */
+
+.ecom-test-grid {
+  display: block;
+  background-color: var(--color-white);
+  padding-block: 90px;
+}
+
+.ecom-test-grid__title {
+  margin: 0 0 30px;
+
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--color-black);
+}
+
+.ecom-test-grid__items {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--grid-gap);
+}
+
+.ecom-test-grid__card {
+  position: relative;
+  aspect-ratio: 433 / 444;
+}
+
+.ecom-test-grid__card-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ecom-test-grid__card-button {
+  position: absolute;
+  left: var(--quick-view-left);
+  top: var(--quick-view-top);
+  transform: translate(-50%, -50%);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: var(--color-white);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+
+.ecom-test-grid__card-button svg {
+  width: 10px;
+  height: 10px;
+}
+
+@media screen and (max-width: 749px){
+  .ecom-test-grid {
+    padding-block: 40px 30px;
+  }
+
+  .ecom-test-grid__title {
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .ecom-test-grid__items {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 5px;
+  }
+
+  .ecom-test-grid__card {
+    aspect-ratio: 169 / 186.42;
+  }
+
+  .ecom-test-grid__card-button {
+    width: 15.71px;
+    height: 15.71px;
+  }
+
+  .ecom-test-grid__card-button svg {
+    width: 7px;
+    height: 7px;
+  }
+}
+
+/* ==========================================================================
+   11. Quick view
+   ========================================================================== */
+
+.ecom-test-quick-view {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  padding: 20px;
+}
+
+.ecom-test-quick-view[hidden] {
+  display: none;
+}
+
+.ecom-test-quick-view__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgb(0 0 0 / 50%);
+}
+
+.ecom-test-quick-view__dialog {
+  position: relative;
+  z-index: 1;
+  width: var(--popup-width);
+  min-height: var(--popup-min-height);
+  max-height: 100%;
+  overflow-y: auto;
+
+  padding: 36px 20px 25px;
+
+  background-color: var(--color-white);
+  box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
+}
+
+.ecom-test-quick-view__close {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  width: 12px;
+  height: 12px;
+  cursor: pointer;
+}
+
+.ecom-test-quick-view__close svg {
+  width: 12px;
+  height: 12px;
+}
+
+.ecom-test-quick-view__media {
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.ecom-test-quick-view__image {
+  display: block;
+  flex: none;
+  width: var(--product-image-width);
+  height: var(--product-image-height);
+  object-fit: cover;
+}
+
+.ecom-test-quick-view__info {
+  min-width: 0;
+}
+
+.ecom-test-quick-view__title {
+  margin: 0 0 20px;
+
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--color-black);
+}
+
+.ecom-test-quick-view__price {
+  margin: 0 0 12px;
+
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--color-black);
+}
+
+.ecom-test-quick-view__description {
+  margin: 0;
+
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.14px;
+  color: var(--color-black);
+}
+
+@media screen and (max-width: 749px) {
+  .ecom-test-quick-view__description {
+    font-size: 12px;
+    letter-spacing: -0.12px;
+  }
+}
+
+
+/* ==========================================================================
+   12. Quick View — Variant Options
+   ========================================================================== */
+
+/* flex + order (not the product's raw option sequence) is what puts Color
+   before Size regardless of how a merchant configured that product's
+   option order in Shopify admin — Figma always shows Color first, but
+   product.options_with_values reflects the merchant's own order, which
+   varies per product. */
+.ecom-test-quick-view__options {
+  gap: 12px;
+}
+
+.ecom-test-quick-view__option {
+  order: 2;
+}
+
+.ecom-test-quick-view__option[data-option-name='color'],
+.ecom-test-quick-view__option[data-option-name='colour'] {
+  order: 0;
+}
+
+.ecom-test-quick-view__option[data-option-name='size'] {
+  order: 1;
+}
+
+.ecom-test-quick-view__option-label {
+  margin: 0 0 6px;
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--color-text-muted);
+}
+
+/* Color/Colour: each option value = a 6px true-color swatch strip + a
+   left-aligned name button, side by side, no gap. Selected state colors
+   only the name portion black/white — the swatch strip always shows the
+   option's real color regardless of selection (confirmed from Figma's own
+   selected-state screenshots: the strip never changes, only the label
+   does). */
+.ecom-test-quick-view__swatches {
+  height: 40px;
+  border: var(--border-thin) solid var(--color-black);
+}
+
+.ecom-test-quick-view__swatch {
+  flex: 1;
+  cursor: pointer;
+}
+
+.ecom-test-quick-view__swatch:not(:last-child) {
+  border-right: var(--border-thin) solid var(--color-black);
+}
+
+.ecom-test-quick-view__swatch-color {
+  flex: 0 0 6px;
+  border-right: var(--border-thin) solid var(--color-black);
+}
+
+.ecom-test-quick-view__swatch-name {
+  flex: 1;
+  min-width: 0;
+  padding-inline: 9px;
+
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: capitalize;
+  text-align: left;
+
+  color: var(--color-black);
+}
+
+.ecom-test-quick-view__swatch.is-selected .ecom-test-quick-view__swatch-name {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+/* Size (and the generic fallback for any other option name): a disclosure
+   listbox, not a native <select> — per the black/white per-item hover and
+   selected states Figma actually shows, which a native select can't
+   reproduce consistently across browsers. */
+.ecom-test-quick-view__select {
+  position: relative;
+}
+
+.ecom-test-quick-view__select-toggle {
+  width: 100%;
+  height: 40px;
+  padding-inline: 13px 19px;
+
+  border: var(--border-thin) solid var(--color-black);
+  background-color: var(--color-white);
+
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: -0.32px;
+  text-align: left;
+  color: var(--color-black);
+
+  cursor: pointer;
+}
+
+.ecom-test-quick-view__select-toggle:after {
+  position: absolute;
+  content: "";
+  width: var(--border-thin);
+  height: 100%;
+  background-color: var(--color-black);
+  right: 55px;
+}
+
+.ecom-test-quick-view__select-chevron {
+  display: inline-flex;
+  flex: none;
+  transition: transform var(--transition-button);
+}
+
+.ecom-test-quick-view__select-toggle[aria-expanded='true'] .ecom-test-quick-view__select-chevron {
+  transform: rotate(180deg);
+}
+
+.ecom-test-quick-view__select-list {
+  position: absolute;
+  inset-inline: 0;
+  top: 100%;
+  z-index: 1;
+
+  margin: 0;
+  padding: 0;
+  max-height: 99px;
+  overflow-y: auto;
+  list-style: none;
+
+  border: var(--border-thin) solid var(--color-black);
+  border-top: none;
+  background-color: var(--color-white);
+}
+
+.ecom-test-quick-view__select-option {
+  padding: 10px 13px;
+
+  font-size: 16px;
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: -0.32px;
+  color: var(--color-black);
+
+  cursor: pointer;
+}
+
+.ecom-test-quick-view__select-option:hover,
+.ecom-test-quick-view__select-option.is-selected {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+.ecom-test-quick-view__select-option[aria-disabled='true'] {
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}
+
+.ecom-test-quick-view__add-to-cart {
+  width: 100%;
+  height: var(--button-height);
+  margin-top: 50px;
+  padding-inline: 20px;
+
+  background-color: var(--color-black);
+  border: none;
+  color: var(--color-white);
+
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20.5px;
+
+  cursor: pointer;
+  transition: opacity var(--transition-button);
+  position: relative;
+}
+
+.ecom-test-quick-view__add-to-cart:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ecom-test-quick-view__add-to-cart-text {
+  display: inline-block;
+}
+
+.ecom-test-quick-view__add-to-cart-arrow {
+  position: absolute;
+  display: inline-flex;
+  flex-shrink: 0;
+  right: 30px;
 }

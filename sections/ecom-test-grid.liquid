@@ -1,0 +1,262 @@
+{% comment %}
+  Custom Product Grid Section
+{% endcomment %}
+
+<div
+  class="ecom-test-grid"
+  data-product-grid
+  data-upsell-product-id="{{ section.settings.upsell_product.id }}"
+  data-upsell-in-cart="false"
+  >
+  <div class="container container-grid">
+    <h2 class="ecom-test-grid__title font-lustria">{{ section.settings.heading }}</h2>
+
+    <div class="ecom-test-grid__items">
+      {% for block in section.blocks %}
+        {% assign product = block.settings.product %}
+        <div 
+          class="ecom-test-grid__card"
+          data-product-card
+          {{ block.shopify_attributes }}
+          >
+          {%- if product != blank -%}
+            {{
+              product.featured_image
+              | image_url: width: 1000
+              | image_tag:
+                class: 'ecom-test-grid__card-image',
+                loading: 'lazy',
+                widths: '433, 619, 866, 1000',
+                sizes: '(min-width: 750px) 33vw, 50vw'
+            }}
+          {%- endif-%}
+          <button
+            type="button"
+            class="ecom-test-grid__card-button inline-flex items-center justify-center"
+            style="--quick-view-left: {{ block.settings.icon_left }}%; --quick-view-top: {{ block.settings.icon_top }}%;"
+            aria-label="Quick view{% if product != blank %} {{ product.title | escape }} {% endif %}"
+            data-quick-view-trigger
+            {% if product != blank %}
+              aria-disabled="false"
+            {% else %}
+              aria-disabled="true"
+            {% endif %}
+            >
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M5 0V10M0 5H10" stroke="black" stroke-width="1"/>
+            </svg>
+          </button>
+
+          {%- if product != blank -%}
+            <template data-quick-view-template>
+              <div class="ecom-test-quick-view__media ecom-flex">
+                {{
+                  product.featured_image
+                  | image_url: width: 460
+                  | image_tag:
+                    class: 'ecom-test-quick-view__image',
+                    width: 120,
+                    height: 140,
+                    widths: '120, 240, 360',
+                    sizes: '120px'
+                }}
+                <div class="ecom-test-quick-view__info ecom-flex flex-column">
+                  <p class="ecom-test-quick-view__title font-jost">{{ product.title }}</p>
+                  <p class="ecom-test-quick-view__price font-lustria" data-quick-view-price>{{ product.price | money | strip_html }}</p>
+                  <p class="ecom-test-quick-view__description font-jost">{{ product.description | strip_html | truncate: 85 }}</p>
+                </div>
+              </div>
+
+              <div class="ecom-test-quick-view__options ecom-flex flex-column">
+                {%- for option in product.options_with_values -%}
+                  {%- assign option_name_down = option.name | downcase -%}
+                  <div
+                    class="ecom-test-quick-view__option"
+                    data-option-group
+                    data-option-index="{{ forloop.index0 }}"
+                    data-option-name="{{ option_name_down }}"
+                  >
+                    <p class="ecom-test-quick-view__option-label font-jost">{{ option.name }}</p>
+
+                    {%- if option_name_down == 'color' or option_name_down == 'colour' -%}
+                      <div class="ecom-test-quick-view__swatches ecom-flex" role="radiogroup" aria-label="{{ option.name }}">
+                        {%- for value in option.values -%}
+                          <button
+                            type="button"
+                            class="ecom-test-quick-view__swatch ecom-flex"
+                            data-option-value="{{ value | escape }}"
+                            aria-pressed="false"
+                          >
+                            <span class="ecom-test-quick-view__swatch-color" style="background-color: {{ value }}"></span>
+                            <span class="ecom-test-quick-view__swatch-name ecom-flex items-center font-jost">{{ value }}</span>
+                          </button>
+                        {%- endfor -%}
+                      </div>
+                    {%- else -%}
+                      <div class="ecom-test-quick-view__select" data-quick-view-select>
+                        <button
+                          type="button"
+                          class="ecom-test-quick-view__select-toggle ecom-flex items-center justify-between font-jost"
+                          aria-haspopup="listbox"
+                          aria-expanded="false"
+                        >
+                          <span data-select-value>
+                            {%- if option_name_down == 'size' -%}
+                              Choose your size
+                            {%- else -%}
+                              Choose {{ option.name | downcase }}
+                            {%- endif -%}
+                          </span>
+                          {% render 'ecom-test-icon-chevron' %}
+                        </button>
+                        <ul class="ecom-test-quick-view__select-list" role="listbox" hidden>
+                          {%- for value in option.values -%}
+                            <li class="ecom-test-quick-view__select-option font-jost" role="option" data-option-value="{{ value | escape }}">
+                              {{ value }}
+                            </li>
+                          {%- endfor -%}
+                        </ul>
+                      </div>
+                    {%- endif -%}
+                  </div>
+                {%- endfor -%}
+              </div>
+
+              <button 
+                type="button" 
+                class="ecom-test-quick-view__add-to-cart inline-flex items-center justify-center font-jost u-uppercase" 
+                data-quick-view-add disabled
+                >
+                <span class="ecom-test-quick-view__add-to-cart-text">Add to cart</span>
+                <span class="ecom-test-quick-view__add-to-cart-arrow">{% render 'ecom-test-icon-arrow' %}</span>
+              </button>
+
+              {%- comment -%} Minimal variant-matching table — not a mirror of
+                 the product, just enough for JS to turn a selected option
+                 combination into a real Shopify variant ID. {%- endcomment -%}
+              <script type="application/json" data-quick-view-variants>
+                [
+                  {%- for variant in product.variants -%}
+                    {
+                      "id": {{ variant.id | json }},
+                      "options": {{ variant.options | json }},
+                      "available": {{ variant.available | json }},
+                      "price": {{ variant.price | money | strip_html | json }}
+                    }{%- unless forloop.last -%},{%- endunless -%}
+                  {%- endfor -%}
+                ]
+              </script>
+            </template>
+          {%- endif -%}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {%- comment -%} Resolved once here so the upsell logic never has to hardcode
+     a product/variant ID — see plan doc section 17. {%- endcomment -%}
+  {%- if section.settings.upsell_product != blank -%}
+    {%- capture upsell_json -%}
+      {
+        "id": {{ section.settings.upsell_product.id | json }},
+        "title": {{ section.settings.upsell_product.title | json }},
+        "optionNames": {{ section.settings.upsell_product.options | json }},
+        "variants": [
+          {%- for variant in section.settings.upsell_product.variants -%}
+            {
+              "id": {{ variant.id | json }},
+              "available": {{ variant.available | json }},
+              "options": {{ variant.options | json }}
+            }{%- unless forloop.last -%},{%- endunless -%}
+          {%- endfor -%}
+        ]
+      }
+    {%- endcapture -%}
+    <script type="application/json" data-upsell-product>{{ upsell_json }}</script>
+  {%- endif -%}
+</div>
+
+{%- comment -%} One shell for the whole page. On open, JS clones whichever
+   card's <template> was clicked into data-quick-view-content — the shell
+   itself owns no product-specific markup, only the chrome around it. {%- endcomment -%}
+<test-quick-view class="ecom-test-quick-view ecom-flex items-center justify-center" hidden>
+  <div class="ecom-test-quick-view__overlay" data-quick-view-overlay></div>
+  <div class="ecom-test-quick-view__dialog" role="dialog" aria-modal="true" aria-label="Quick view">
+    <button 
+      type="button" class="ecom-test-quick-view__close inline-flex items-center justify-center" 
+      data-quick-view-close 
+      aria-label="Close"
+      >
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M1 1L15 15" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M15 1L1 15" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <div class="ecom-test-quick-view__content" data-quick-view-content></div>
+  </div>
+</test-quick-view>
+
+{% schema %}
+{
+  "name": "Ecom Test Grid",
+  "tag": "section",
+  "class": "custom-section__grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Tisso vison in the wild"
+    },
+    {
+      "type": "header",
+      "content": "Upsell"
+    },
+    {
+      "type": "product",
+      "id": "upsell_product",
+      "label": "Upsell Product",
+      "info": "Silently added alongside any product added with Color = Black and Size = M."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_block",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "range",
+          "id": "icon_left",
+          "label": "Icon horizontal position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "icon_top",
+          "label": "Icon vertical position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 50
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Ecom Test Grid"
+    }
+  ]
+}
+{% endschema %}
