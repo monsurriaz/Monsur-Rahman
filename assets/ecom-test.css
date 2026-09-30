@@ -739,6 +739,7 @@ header.ecom-site__header:has(.site-header__toggle[aria-expanded='true']) .site-h
 }
 
 .ecom-test-grid__items {
+  display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--grid-gap);
 }
