@@ -25,6 +25,9 @@
     {%- render 'theme-styles-variables' -%}
     {%- render 'color-palette' -%}
 
+    {{ 'ecom-test.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'ecom-test.js' | asset_url }}" type="module"></script>
+
     {% if request.design_mode %}
       {%- render 'theme-editor' -%}
     {% endif %}
