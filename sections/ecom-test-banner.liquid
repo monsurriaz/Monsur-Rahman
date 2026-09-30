@@ -1,0 +1,225 @@
+{% comment %} 
+  A combine sections of Header, Banner and Accouncement bar
+{% endcomment %}
+
+{% capture header_cta %}
+  {% if section.settings.cta_button_url != blank %}
+    <a href="{{ section.settings.cta_button_url }}" class="ecom-test-button">
+      <span class="ecom-test-button__bg"></span>
+      <span class="ecom-test-button__line"></span>
+      <span class="ecom-test-button__label">{{ section.settings.cta_button_text }}</span>
+      <span class="ecom-test-button__arrow">
+        <svg width="26" height="12" viewBox="0 0 26 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M0.75 4.77298L7.37629e-08 4.77298L-7.37629e-08 6.27298L0.75 6.27298L0.75 4.77298ZM25.2803 6.05331C25.5732 5.76042 25.5732 5.28554 25.2803 4.99265L20.5074 0.21968C20.2145 -0.073213 19.7396 -0.0732131 19.4467 0.21968C19.1538 0.512574 19.1538 0.987447 19.4467 1.28034L23.6893 5.52298L19.4467 9.76562C19.1538 10.0585 19.1538 10.5334 19.4467 10.8263C19.7396 11.1192 20.2145 11.1192 20.5074 10.8263L25.2803 6.05331ZM0.75 6.27298L24.75 6.27298L24.75 4.77298L0.75 4.77298L0.75 6.27298Z" fill="currentColor"/>
+        </svg>
+      </span>
+    </a>
+  {% endif %}
+{% endcapture %}
+
+{% comment %} Header {% endcomment %}
+<test-header class="site-header">
+  <header class="ecom-site__header">
+    <div class="container">
+      <div class="grid site-header__bar site-header__bar-desktop">
+        <button
+          type="button"
+          class="site-header__toggle"
+          data-header-toggle
+          aria-expanded="false"
+          aria-controls="site-header-panel"
+          aria-label="Toggle navigation"
+          >
+          <svg 
+            class="site-header__toggle-icon site-header__toggle-icon--menu" 
+            width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+            >
+            <path d="M1 6H19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M1 1H19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M1 11H19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <svg 
+            class="site-header__toggle-icon site-header__toggle-icon--close" 
+            width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+            >
+            <path d="M1 13.9994L13.7279 1.27147" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M1 1L13.7279 13.7279" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <a href="{{ routes.root_url }}" class="site-header__logo" aria-label="{{ shop.name }}">
+          {% render 'ecom-test-header-logo', section: section %}
+        </a>
+        <p class="site-header__text font-jost text-center">{{ section.settings.header_text }}</p>
+        <div class="site-header__cta">
+          {{ header_cta }}
+        </div>
+      </div>
+    </div>
+
+    {% comment %} Mobile panel: revealed by <test-header> toggling [hidden] {% endcomment %}
+    <div id="site-header-panel" class="site-header__panel" data-header-panel hidden>
+      <p class="site-header__text font-jost text-center">{{ section.settings.header_text }}</p>
+      {{ header_cta }}
+    </div>
+  </header>
+</test-header>
+
+{% comment %} Banner Area {% endcomment %}
+<div class="ecom-test__banner">
+  <div class="ecom-test-banner__inner">
+    <div class="ecom-test-banner__artwork ecom-test-banner__artwork--top">
+      {%- if section.settings.banner_artwork_desktop != blank -%}
+        {{ section.settings.banner_artwork_desktop | image_url: width: 1600 | image_tag: loading: 'lazy' }}
+      {%- else -%}
+        {{ 'lifestyle-2' | placeholder_svg_tag }}
+      {%- endif -%}
+    </div>
+    <div class="ecom-test-banner__artwork ecom-test-banner__artwork--bottom">
+      {%- if section.settings.banner_artwork_desktop != blank -%}
+        {{ section.settings.banner_artwork_desktop | image_url: width: 1000 | image_tag: loading: 'lazy' }}
+      {%- else -%}
+        {{ 'lifestyle-2' | placeholder_svg_tag }}
+      {%- endif -%}
+    </div>
+    <div class="ecom-test-banner__artwork ecom-test-banner__artwork--mobile">
+      {%- if section.settings.banner_artwork_mobile != blank -%}
+        {{ section.settings.banner_artwork_mobile | image_url: width: 800 | image_tag: loading: 'lazy' }}
+      {%- else -%}
+        {{ 'lifestyle-2' | placeholder_svg_tag }}
+      {%- endif -%}
+    </div>
+
+    <div class="container ecom-test-banner__content">
+      <div class="ecom-test-banner__content-inner">
+        <h2 class="ecom-test-banner__title font-jost">{{ section.settings.banner_heading }}</h2>
+        <p class="ecom-test-banner__text ecom-test-banner__text--desktop font-jost">{{ section.settings.banner_description }}</p>
+        <p class="ecom-test-banner__text ecom-test-banner__text--mobile font-jost">{{ section.settings.banner_description_mobile }}</p>
+        {%- if section.settings.banner_cta_url != blank -%}
+          <a href="{{ section.settings.banner_cta_url }}" class="ecom-test-banner__button font-jost">
+            <span class="ecom-test-banner__button-bg"></span>
+            <span class="ecom-test-banner__button-line"></span>
+            <span class="ecom-test-banner__button-label">{{ section.settings.banner_cta_text }}</span>
+            <span class="ecom-test-banner__button-arrow">{% render 'ecom-test-icon-arrow' %}</span>
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  <p class="ecom-test-banner__subtext font-jost text-center">{{ section.settings.announcement_text }}</p>
+</div>
+
+{% comment %} Hide default header {% endcomment %}
+<style>
+  .shopify-section-group-header-group  {
+    display: none !important;
+  }
+</style>
+
+
+{% schema %}
+{
+  "name": "Ecom Test Banner",
+  "tag": "section",
+  "class": "custom-section__banner",
+  "settings": [
+      {
+        "type": "header",
+        "content": "Logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_image",
+        "label": "Logo as Image"
+      },
+      {
+        "type": "text",
+        "id": "logo_text",
+        "label": "Logo as Text",
+        "default": "TISSO VISON"
+      },
+      {
+        "type": "text",
+        "id": "header_text",
+        "label": "Header Text",
+        "default": "Find the ideal gift for your loved ones."
+      },
+      {
+        "type": "header",
+        "content": "CTA Button"
+      },
+      {
+        "type": "url",
+        "id": "cta_button_url",
+        "label": "CTA Button URL"
+      },
+      {
+        "type": "text",
+        "id": "cta_button_text",
+        "label": "CTA Button Text",
+        "default": "Choose Gift"
+      },
+      {
+        "type": "header",
+        "content": "Banner"
+      },
+      {
+        "type": "text",
+        "id": "banner_heading",
+        "label": "Heading",
+        "default": "The Gift Guide"
+      },
+      {
+        "type": "textarea",
+        "id": "banner_description",
+        "label": "Description (desktop)",
+        "default": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season."
+      },
+      {
+        "type": "textarea",
+        "id": "banner_description_mobile",
+        "label": "Description (mobile)",
+        "default": "Discover Joy: Your Ultimate Holiday Gift Destination."
+      },
+      {
+        "type": "text",
+        "id": "banner_cta_text",
+        "label": "Banner CTA Text",
+        "default": "Shop Now"
+      },
+      {
+        "type": "url",
+        "id": "banner_cta_url",
+        "label": "Banner CTA URL"
+      },
+      {
+        "type": "image_picker",
+        "id": "banner_artwork_desktop",
+        "label": "Artwork (desktop)"
+      },
+      {
+        "type": "image_picker",
+        "id": "banner_artwork_mobile",
+        "label": "Artwork (mobile)"
+      },
+      {
+        "type": "header",
+        "content": "Announcement"
+      },
+      {
+        "type": "text",
+        "id": "announcement_text",
+        "label": "Text",
+        "default": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Ecom Test Banner",
+        "settings": {}
+      }
+    ]
+}
+{% endschema %}
